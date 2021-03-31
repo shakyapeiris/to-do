@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>My task tracker</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
+</head>
+<style>
+    @media(max-width:600px){
+        table{
+            margin-top: 10px;
+        }
+    }
+    header{
+        padding-top: 20px;
+        padding-left: 10px;
+        height: 10vh;
+        color: white;
+        
+        background: rgb(121,9,30);
+        background: linear-gradient(27deg, rgba(121,9,30,1) 0%, rgba(255,0,112,1) 0%, rgba(251,240,0,1) 100%);
+    }
+    header h4{
+        font-family: 'Train One', cursive;
+    }
+
+    body{
+        background: rgb(121,9,30);
+background: linear-gradient(261deg, rgba(121,9,30,1) 0%, rgba(0,255,226,1) 0%, rgba(0,131,251,1) 100%);
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+    }
+
+</style>
+
+<body>
+
+    <header>
+        <h4>My task tracker</h4>
+        <div style="position: absolute; top: 3%; right: 5%; "><span style="font-size: 1.2em; font-weight: bold; margin-right: 5px;">Welcome, {{ user.username }}</span><a href="/logout/" class="btn btn-primary">Logout</a></div>
+    </header>
+    
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+    <form method = "POST" autocomplete="off" style="width: 80%; margin: auto;">
+        {% csrf_token %}
+        <h3 align = "center" style="font-family: 'Chango', cursive;background: rgb(121,9,30);
+        background: linear-gradient(27deg, rgba(121,9,30,1) 0%, rgba(255,0,112,1) 0%, rgba(251,240,0,1) 100%); -webkit-background-clip:text; -webkit-text-fill-color: transparent;">Add a new task</h3>
+<!--         <div class="form-group">
+        <label for="task">Task:</label>
+        <input type="text" name="task" id="task" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="date">Enter the due-date</label>
+        <input type ="date" name = "date" id = "date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="time">Enter the due-time</label>
+        <input type ="time" name = "time" id = "time" class="form-control">
+    </div>  -->
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.label }}
+            {{ field }}
+        </div>
+    {% endfor %}
+        <input type="submit" name="" id="" class="btn btn-outline-danger">
+    </form>
+</div>
+<div class="col-md-6 col-sm-12">
+    <table class="table table-bordered table-stripped table-hover table-dark" style="width: 80%; margin-left: auto; margin-right: auto;">
+        <tr>
+            <th>Task</th>
+            <th>Due date</th>
+            <th>Action</th>
+        </tr>
+        {% for item in opt %}
+        <tr>
+            <td>{{ item.task_name }}</td>
+            <td>{{ item.due_date }} {{ item.due_time }}</td>
+            <td><a href="{% url 'update' item.id %}" class="btn btn-warning" style="margin-bottom :5px;">Update</a> <br> <a href="{% url 'delete' item.id %}" class="btn btn-warning">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"
+    integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk="crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
+      integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+  <script src="https://kit.fontawesome.com/d5da95cea5.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
