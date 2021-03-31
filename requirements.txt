@@ -71,12 +71,10 @@ pyinstaller-hooks-contrib==2020.10
 pymongo==3.11.2
 pyparsing==2.4.7
 PyPDF2==1.26.0
-pypiwin32==223
 pyrsistent==0.17.3
 python-dateutil==2.8.1
 pyttsx3==2.90
 pytz==2021.1
-pywin32==300
 pywin32-ctypes==0.2.0
 pywinpty==0.5.7
 pyzmq==21.0.1
